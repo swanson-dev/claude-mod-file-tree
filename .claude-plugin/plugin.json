@@ -1,1 +1,75 @@
-{ "name": "file-tree", "version": "0.2.0", "description": "A file tree pane with git status, search, selection context and Claude read/write highlights", "types": "./types/index.d.ts", "license": "MIT" }
+{
+  "name": "file-tree",
+  "version": "0.3.0",
+  "description": "A file tree pane with git status, search, keyboard navigation, shimmer on files Claude touches, previews, diffs and git-operation status",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "userConfig": {
+    "activity": {
+      "type": "string",
+      "title": "Claude activity",
+      "description": "Which of Claude's file activity shimmers: reads (Read tool or Bash readers like cat and rg) in purple, writes in orange",
+      "default": "reads and writes",
+      "options": [
+        "reads and writes",
+        "writes",
+        "reads",
+        "none"
+      ]
+    },
+    "follow": {
+      "type": "string",
+      "title": "Follow Claude",
+      "description": "on: the cursor and tree move to what Claude reads or writes. off: the view stays where you put it",
+      "default": "on",
+      "options": [
+        "on",
+        "off"
+      ]
+    },
+    "start": {
+      "type": "string",
+      "title": "Open at start",
+      "description": "on: the pane opens when a session starts. off: only /file-tree opens it",
+      "default": "on",
+      "options": [
+        "on",
+        "off"
+      ]
+    },
+    "column": {
+      "type": "string",
+      "title": "Right column",
+      "description": "What the right column shows: date, age or size; the \u03a3 button and z cycle it",
+      "default": "date",
+      "options": [
+        "date",
+        "age",
+        "size"
+      ]
+    },
+    "glyphs": {
+      "type": "string",
+      "title": "Glyphs",
+      "description": "auto: plain Unicode on the desktop app, Nerd Font elsewhere. nerd or plain forces one",
+      "default": "auto",
+      "options": [
+        "auto",
+        "nerd",
+        "plain"
+      ]
+    },
+    "open": {
+      "type": "string",
+      "title": "Open with",
+      "description": "preview shows a file in the pane. Anything else is a command run on the file: {path} is the file, otherwise the path goes last; words split on spaces, no shell. It runs where the session runs",
+      "default": "preview"
+    },
+    "ignore": {
+      "type": "string",
+      "title": "Ignore",
+      "description": "Names to leave out of the tree and search, separated by spaces or commas, besides .git, node_modules and .tmp. Example: .cache dist",
+      "default": ""
+    }
+  }
+}
