@@ -272,9 +272,9 @@ export const register: Register = (on, options) => {
   })
 
   on('command.run', { command: 'file-tree' }, async $ => {
-    await start($)
+    const placed = await start($)
 
-    return { text: 'File tree pane opened.' }
+    return { text: placed?.isPlaced === false ? `File tree pane is open but no surface drew it: ${placed.reason}` : 'File tree pane opened.' }
   })
 
   on('tool.call', async ($, e, next) => {

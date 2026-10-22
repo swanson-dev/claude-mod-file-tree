@@ -9,9 +9,9 @@ const PANE = {
 
 const entry = (name: string, kind: 'file' | 'dir') => ({ name, kind, size: 2048, mtimeMs: 1_700_000_000_000, isLink: false })
 
-const setup = ($: any, on: any) => {
+const setup = ($: any, on: any, opened: object = { isPlaced: true }) => {
   on('command.register', () => ({ value: { command: 'file-tree' } }))
-  on('ui.open', () => ({ value: { isPlaced: true } }))
+  on('ui.open', () => ({ value: opened }))
   on('session.start', (_: any, e: any) => ({ cwd: e.cwd }))
   on('clock.now', () => ({ value: 1_700_000_100_000 }))
   on('fs.list', () => ({ value: [entry('b.md', 'file'), entry('docs', 'dir'), entry('.git', 'dir'), entry('node_modules', 'dir')] }))
@@ -65,4 +65,12 @@ test('a drawing the mod leaves goes to the engine', async ($, on) => {
   const ui = await $.ui.mount({ ...PANE, requestId: 'other', surface: 'desktop' })
   expect(await ui.find({ type: 'Text', text: /engine/ })).toBeTruthy()
   await ui.unmount()
+})
+
+test('/file-tree says when no surface drew the pane', async ($, on) => {
+  setup($, on, { isPlaced: false, reason: 'no surface places panes' })
+  await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
+
+  const out = await run($)
+  expect(JSON.stringify(out)).toContain('no surface places panes')
 })
