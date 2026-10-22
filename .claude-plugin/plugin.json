@@ -1,0 +1,1 @@
+{ "name": "file-tree", "version": "0.2.0", "description": "A file tree pane with git status, search, selection context and Claude read/write highlights", "types": "./types/index.d.ts", "license": "MIT" }

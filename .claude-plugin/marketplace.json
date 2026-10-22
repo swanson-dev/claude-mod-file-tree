@@ -1,0 +1,12 @@
+{
+  "name": "claude-mod-file-tree",
+  "owner": { "name": "swanson-dev" },
+  "metadata": { "description": "A file tree pane for Claude Code with git status, search and Claude read/write highlights" },
+  "plugins": [
+    {
+      "name": "file-tree",
+      "description": "A file tree pane with git status, search, selection context and Claude read/write highlights",
+      "source": "./"
+    }
+  ]
+}
